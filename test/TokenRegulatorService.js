@@ -1,13 +1,13 @@
 const { expect } = require("chai")
   .use(require("chai-as-promised"));
 
-const TokenRegulator = artifacts.require("TokenRegulator");
+const TokenRegulatorService = artifacts.require("TokenRegulatorService");
 
-contract("TokenRegulator", (accounts) => {
+contract("TokenRegulatorService", (accounts) => {
   let instance = null;
 
   beforeEach(async () => {
-    instance = await TokenRegulator.new();
+    instance = await TokenRegulatorService.new();
   });
 
   it("should have contract deployer as owner", async () => {

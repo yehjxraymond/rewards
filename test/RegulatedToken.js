@@ -1,15 +1,15 @@
 const { expect } = require("chai")
   .use(require("chai-as-promised"));
 const RegulatedToken = artifacts.require("RegulatedToken");
-const TokenRegulator = artifacts.require("TokenRegulator");
+const TokenRegulatorService = artifacts.require("TokenRegulatorService");
 
-contract.only("RegulatedToken", (accounts) => {
+contract("RegulatedToken", (accounts) => {
   const mintingAccount = accounts[2];
   let regulatorService;
   let instance = null;
 
   before(async () => {
-    regulatorService = await TokenRegulator.new();
+    regulatorService = await TokenRegulatorService.new();
     await regulatorService.allowMinting(mintingAccount);
   });
 

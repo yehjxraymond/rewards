@@ -1,9 +1,8 @@
-const { expect } = require("chai")
-  .use(require("chai-as-promised"));
+const { expect } = require("chai").use(require("chai-as-promised"));
 
 const TokenRegulatorService = artifacts.require("TokenRegulatorService");
 
-contract("TokenRegulatorService", (accounts) => {
+contract("TokenRegulatorService", accounts => {
   let instance = null;
 
   beforeEach(async () => {
@@ -25,12 +24,13 @@ contract("TokenRegulatorService", (accounts) => {
 
     await instance.allowMinting(allowedAccount);
     const allowed = await instance.minters.call(allowedAccount);
-    
+
     expect(allowed).to.be.true;
   });
 
   it("should not allow non-owner to add minter", async () => {
-    await expect(instance.allowMinting(accounts[1], {from: accounts[1]})).to.be.rejected;
+    await expect(instance.allowMinting(accounts[1], { from: accounts[1] })).to
+      .be.rejected;
   });
 
   it("should allow owner to remove minter", async () => {
@@ -46,6 +46,7 @@ contract("TokenRegulatorService", (accounts) => {
   });
 
   it("should not allow non-owner to remove minter", async () => {
-    await expect(instance.allowMinting(accounts[1], {from: accounts[1]})).to.be.rejected;
+    await expect(instance.allowMinting(accounts[1], { from: accounts[1] })).to
+      .be.rejected;
   });
 });

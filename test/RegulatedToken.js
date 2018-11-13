@@ -1,16 +1,16 @@
 const { expect } = require("chai").use(require("chai-as-promised"));
 
 const RegulatedToken = artifacts.require("RegulatedToken");
-const TokenRegulatorService = artifacts.require("TokenRegulatorService");
+const TokenAdministration = artifacts.require("TokenAdministration");
 
 contract("RegulatedToken", accounts => {
   const mintingAccount = accounts[2];
-  let regulatorService;
+  let adminService;
   let instance = null;
 
   before(async () => {
-    regulatorService = await TokenRegulatorService.new();
-    await regulatorService.allowMinting(mintingAccount);
+    adminService = await TokenAdministration.new();
+    await adminService.allowMinting(mintingAccount);
   });
 
   beforeEach(async () => {
@@ -18,7 +18,7 @@ contract("RegulatedToken", accounts => {
       "Rewards",
       "RWD",
       18,
-      regulatorService.address
+      adminService.address
     );
   });
 
@@ -32,7 +32,7 @@ contract("RegulatedToken", accounts => {
     expect(name).to.be.eq("Rewards");
     expect(symbol).to.be.eq("RWD");
     expect(decimals.toNumber()).to.be.eq(18);
-    expect(regulator).to.be.eq(regulatorService.address);
+    expect(regulator).to.be.eq(adminService.address);
     expect(totalSupply.toNumber()).to.be.eq(0);
   });
 

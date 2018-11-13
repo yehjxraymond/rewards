@@ -3,10 +3,10 @@ pragma solidity ^0.4.24;
 import "openzeppelin-solidity/contracts/token/ERC20/ERC20.sol";
 import "openzeppelin-solidity/contracts/token/ERC20/ERC20Detailed.sol";
 
-import "./TokenRegulatorService.sol";
+import "./TokenAdministration.sol";
 
 contract RegulatedToken is ERC20, ERC20Detailed {
-    TokenRegulatorService public tokenRegulator;
+    TokenAdministration public tokenRegulator;
 
     constructor(
         string name,
@@ -14,7 +14,7 @@ contract RegulatedToken is ERC20, ERC20Detailed {
         uint8 decimals,
         address regulator
     ) ERC20Detailed(name, symbol, decimals) public {
-        tokenRegulator = TokenRegulatorService(regulator);
+        tokenRegulator = TokenAdministration(regulator);
     }
 
     modifier onlyMinter(address _account){

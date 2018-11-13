@@ -35,6 +35,7 @@ contract TokenAdministration is  Ownable {
     }
 
     function approveAccount(address _account) public onlyOwner{
+        require(merchantIsSet(_account), "Account is not registered");
         approved[_account] = true;
     }
 

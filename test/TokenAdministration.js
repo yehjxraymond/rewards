@@ -96,6 +96,11 @@ contract.only("TokenAdministration", accounts => {
 
   describe("transfer", () => {
     it("should allow transfer to merchants", async () => {
+      const account = accounts[3];
+      const name = "My Merchant Account";
+
+      await instance.register(name, { from: account });
+
       await instance.approveAccount(accounts[3], { from: owner });
       const canTransfer = await instance.canTransfer.call(owner, accounts[3]);
       expect(canTransfer).to.be.true;
